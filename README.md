@@ -1,6 +1,6 @@
 # Brol
 
-*Brol: en Belgique: Désordre, bazar.*
+*Brol ~ en Belgique: Désordre, bazar.*
 
 Developed by Christian Visintin
 
