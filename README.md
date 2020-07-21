@@ -1,9 +1,14 @@
-# Robe
+# Brol
 
-~ Robe non sta per armadio ~
+*Brol: en Belgique: Désordre, bazar.*
+
+Developed by Christian Visintin
 
 ## Code of conduct
 
-- Documentazion solo in triestin stretto
-- Commit generadi solo con ```git yolo```
-- Se cariga solo esempi de robe per i vari linguaggi. Esperimenti a caso, robe cusì per scazzo
+View repository [Code of conduct](CODE_OF_CONDUCT.md)
+
+## License
+
+Licensed under WTFPL
+See the entire license text [HERE](LICENSE.txt)

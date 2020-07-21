@@ -11,7 +11,7 @@ int main(int argc, char* argv[]) {
   } else {
     std::ofstream file_w(filename);
     file_w.close();
-    std::cout << "Non tuona" << std::endl;
+    std::cout << "See? Doesn't throw" << std::endl;
   }
 
   return 0;
