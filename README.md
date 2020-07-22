@@ -20,6 +20,7 @@ Developed by Christian Visintin
 
 - **easyfb**: simple library to interact with the framebuffer (read/write you know). **MIT license**
 - **jannson**: an example which shows how to use jannson JSON library
+- **traslate-bit-size**: Traslate a numeric value into another bit power (e.g. 31,5 => 255,8)
 - **uintToAscii**: a converter for uintx_t to ASCII buffer
 
 ---
