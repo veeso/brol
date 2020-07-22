@@ -11,6 +11,7 @@ Developed by Christian Visintin
     - [JavaScript](#javascript)
     - [PHP](#php)
     - [Python](#python)
+    - [Rust](#rust)
   - [Code of conduct](#code-of-conduct)
   - [License](#license)
 
@@ -59,6 +60,15 @@ Developed by Christian Visintin
 - **modem-utils**: Utility to query modem
 - **struncate**: I swear nobody has ever did this before. A damn function to truncate the first n bytes from a file **without** creating a new one.
 - **subvar**: Replace ```$VARIABLES``` and ```${VARIABLES}``` in files using environment.
+
+---
+
+### Rust
+
+- **console**: Console utils
+- **file-utils**: File utilities
+
+---
 
 ## Code of conduct
 
