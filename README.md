@@ -20,14 +20,17 @@ Developed by Christian Visintin
 ### C
 
 - **easyfb**: simple library to interact with the framebuffer (read/write you know). **MIT license**
+- **elapsed-ms**: How to get elapsed time in microseconds
 - **jannson**: an example which shows how to use jannson JSON library
 - **traslate-bit-size**: Traslate a numeric value into another bit power (e.g. 31,5 => 255,8)
+- **TunTap**: create and perform I/O on TUN/TAPs
 - **uintToAscii**: a converter for uintx_t to ASCII buffer
 
 ---
 
 ### CPP
 
+- **base64pp**: Simple base64 library in C++
 - **fstream-doesnot-throw**: nothing, just a proof that fstream doesn't throw if was not possible to open it
 - **ftpcurlpp**: Ever wondered how to use curlpp with FTP? I did and I couldn't find any example on how to use it...
 - **getdir**: Get all files in a directry
