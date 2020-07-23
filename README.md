@@ -71,7 +71,9 @@ Developed by Christian Visintin
 ### Qt
 
 - **filehandler**: Simple file I/O QML utility
+- **FPSText**: Show FPS in QML
 - **Netif**: Simple network interface QML utilty
+- **Pong**: YES
 - **Process** run subprocesses from QML
 
 ---
