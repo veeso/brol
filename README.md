@@ -59,6 +59,7 @@ Developed by Christian Visintin
 
 ### Python
 
+- **crypter**: AES CLI encrypter/decrypter written in Python3
 - **logrotate-cli**: CLI application which can be used to rotate logs. Is not a daemon, must be called manually. *I Should really make a Pypi binary out of this*
 - **modem-utils**: Utility to query modem
 - **struncate**: I swear nobody has ever did this before. A damn function to truncate the first n bytes from a file **without** creating a new one.
