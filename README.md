@@ -40,6 +40,7 @@ Developed by Christian Visintin
 - **lz4**: an example on how to use lz4 in c++
 - **mosquittopp**: an example on how to use mosquittopp in c++
 - **nlohmann-query**: An algorithm to make recursive query in nlohmann (e.g. find a.b[1].c in a JSON)
+- **tzoffset**: Get current timezone offset in C++
 - **utils**: utilities (for filesystem, strings, those stuff you know)
 - **xml2**: libxml2 example
 
