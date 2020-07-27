@@ -20,7 +20,7 @@ Developed by Christian Visintin
 
 ### C
 
-- **easyfb**: simple library to interact with the framebuffer (read/write you know). **MIT license**
+- **[easyfb](c/easyfb)**: simple library to interact with the framebuffer (read/write you know). **MIT license**
 - **elapsed-ms**: How to get elapsed time in microseconds
 - **jannson**: an example which shows how to use jannson JSON library
 - **traslate-bit-size**: Traslate a numeric value into another bit power (e.g. 31,5 => 255,8)
