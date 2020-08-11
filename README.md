@@ -52,6 +52,7 @@ Developed by Christian Visintin
 
 - **[ISO3166](java/ISO3166)**: ISO3166 utils
 - **[ISO8601](java/ISO8601)**: ISO8601 utils
+- **[MySqlDateTime](java/MySqlDateTime)**: MySQL/MariaDB date parser
 
 ---
 
