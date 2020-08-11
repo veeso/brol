@@ -76,6 +76,7 @@ Developed by Christian Visintin
 - **[modem-utils](python/modem-utils)**: Utility to query modem
 - **[struncate](python/struncate)**: I swear nobody has ever did this before. A damn function to truncate the first n bytes from a file **without** creating a new one.
 - **[subvar](python/subvar)**: Replace ```$VARIABLES``` and ```${VARIABLES}``` in files using environment.
+- **[wikidata-search](python/wikidata-search)**: Simple Python3 script which searches on wikidata the provided input and if the result is a person, retrieves metadata for it
 
 ---
 
