@@ -69,6 +69,7 @@ Developed by Christian Visintin
 
 ### Python
 
+- **[base64-cli](python/base64)**: Base64 CLI encoder/decoder written in Python3
 - **[crypter](python/crypter)**: AES CLI encrypter/decrypter written in Python3
 - **[logrotate-cli](python/logrotate-cli)**: CLI application which can be used to rotate logs. Is not a daemon, must be called manually. *I Should really make a Pypi binary out of this*
 - **[modem-utils](python/modem-utils)**: Utility to query modem
