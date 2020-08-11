@@ -179,7 +179,7 @@ def encrypt_file(input_file: str, output_file: str, crypter_key: str) -> bool:
                     input_block[i] = ord(ihnd.read(1))
                 input_block = bytearray(crypter.encrypt(bytes(input_block)))
                 # index : filesize = progress : 100
-                progress = int((index * 100) / filesize)
+                progress = (index * 100) / filesize
                 print_progress_bar(progress, 100)
                 #Write bytes
                 ohnd.write(input_block)
@@ -301,7 +301,7 @@ def decrypt_file(input_file: str, output_file: str, crypter_key: str) -> bool:
                     ohnd.write(decrypted_block[0:native_data_size])
                 else:
                     ohnd.write(decrypted_block) #Write entire block otherwise
-                progress = int((offset * 100) / datasize)
+                progress = (offset * 100) / datasize
                 print_progress_bar(progress, 100)
             #Close file
             ohnd.close()
