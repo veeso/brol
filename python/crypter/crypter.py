@@ -30,6 +30,8 @@ import hmac
 #Argv
 from sys import argv, exit
 
+from typing import Optional
+
 PROGRAM_NAME = "crypter.py"
 USAGE = "%s [OPTIONS...] [INPUT_FILE] [OUTPUT_FILE]\n\
     Where options are:\n\
@@ -87,6 +89,26 @@ def usage(err: str = None):
     if err:
         print_err(err)
     print("%s" % USAGE)
+
+def print_progress_bar (iteration: int, total: int, prefix: Optional[str] = '', suffix: Optional[str] = '', decimals: Optional[int] = 1, length: Optional[int] = 100, fill: Optional[str] = '█', printEnd: Optional[str] = "\r"):
+    """
+    Call in a loop to create terminal progress bar
+    :param iteration   - Required  : current iteration (Int)
+    :param total       - Required  : total iterations (Int)
+    :param prefix      - Optional  : prefix string (Str)
+    :param suffix      - Optional  : suffix string (Str)
+    :param decimals    - Optional  : positive number of decimals in percent complete (Int)
+    :param length      - Optional  : character length of bar (Int)
+    :param fill        - Optional  : bar fill character (Str)
+    :param printEnd    - Optional  : end character (e.g. "\r", "\r\n") (Str)
+    """
+    percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
+    filledLength = int(length * iteration // total)
+    bar = fill * filledLength + '-' * (length - filledLength)
+    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end = printEnd)
+    # Print New Line on Complete
+    if iteration >= total: 
+        print()
 
 def encrypt_file(input_file: str, output_file: str, crypter_key: str) -> bool:
     """
@@ -148,6 +170,7 @@ def encrypt_file(input_file: str, output_file: str, crypter_key: str) -> bool:
             #Read, Encrypt and write
             index = 0
             input_block = bytearray(BLOCK_SIZE)
+            progress = 0
             while index < filesize:
                 size = BLOCK_SIZE
                 if filesize - index < BLOCK_SIZE:
@@ -155,6 +178,9 @@ def encrypt_file(input_file: str, output_file: str, crypter_key: str) -> bool:
                 for i in range(size):
                     input_block[i] = ord(ihnd.read(1))
                 input_block = bytearray(crypter.encrypt(bytes(input_block)))
+                # index : filesize = progress : 100
+                progress = int((index * 100) / filesize)
+                print_progress_bar(progress, 100)
                 #Write bytes
                 ohnd.write(input_block)
                 #Update digest with encrypted block
@@ -263,6 +289,7 @@ def decrypt_file(input_file: str, output_file: str, crypter_key: str) -> bool:
             #Open output file
             ohnd = open(output_file, "wb")
             offset = 0
+            progress = 0
             while offset < datasize: # <= cause we're already at 16 (imagine if filesize were 48, datasize would be 16)
                 input_block = bytearray()
                 input_block.extend(ihnd.read(BLOCK_SIZE))
@@ -274,6 +301,8 @@ def decrypt_file(input_file: str, output_file: str, crypter_key: str) -> bool:
                     ohnd.write(decrypted_block[0:native_data_size])
                 else:
                     ohnd.write(decrypted_block) #Write entire block otherwise
+                progress = int((offset * 100) / datasize)
+                print_progress_bar(progress, 100)
             #Close file
             ohnd.close()
         except IOError as err:
