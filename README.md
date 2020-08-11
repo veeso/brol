@@ -24,6 +24,7 @@ Developed by Christian Visintin
 - **[easyfb](c/easyfb)**: simple library to interact with the framebuffer (read/write you know). **MIT license**
 - **[elapsed-ms](c/elapsed-us)**: How to get elapsed time in microseconds
 - **[jannson](c/jannson)**: an example which shows how to use jannson JSON library
+- **[settimeofday](c/settimeofday)**: An example program which shows how to set system time
 - **[traslate-bit-size](c/traslate-bit-size)**: Traslate a numeric value into another bit power (e.g. 31,5 => 255,8)
 - **[TunTap](c/TunTap)**: create and perform I/O on TUN/TAPs
 - **[uintToAscii](c/uintToAscii)**: a converter for uintx_t to ASCII buffer
