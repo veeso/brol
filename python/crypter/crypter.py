@@ -50,6 +50,8 @@ KMAG = "\x1B[35m"
 KCYN = "\x1B[36m"
 KWHT = "\x1B[37m"
 
+BLOCK_SIZE = 4096
+
 verbose = False
 
 class CrypterMode(Enum):
@@ -145,10 +147,10 @@ def encrypt_file(input_file: str, output_file: str, crypter_key: str) -> bool:
             ohnd.write(iv)
             #Read, Encrypt and write
             index = 0
-            input_block = bytearray(16)
+            input_block = bytearray(BLOCK_SIZE)
             while index < filesize:
-                size = 16
-                if filesize - index < 16:
+                size = BLOCK_SIZE
+                if filesize - index < BLOCK_SIZE:
                     size = filesize - index
                 for i in range(size):
                     input_block[i] = ord(ihnd.read(1))
@@ -168,6 +170,10 @@ def encrypt_file(input_file: str, output_file: str, crypter_key: str) -> bool:
             #Write HMAC at the end of the file
             ohnd.write(final_hmac)
             print_info("Wrote %d bytes" % (index + 32))
+            # Write original file size at the end of file
+            data_size_bytes = (filesize).to_bytes(8, byteorder="big")
+            print_info("Wrote 8 bytes at the end %s" % hexlify(data_size_bytes).decode("utf-8"))
+            ohnd.write(data_size_bytes)
             ohnd.close()
         except IOError as err:
             print_err("IOError: %s" % err)
@@ -196,17 +202,16 @@ def decrypt_file(input_file: str, output_file: str, crypter_key: str) -> bool:
     try:
         ihnd = open(input_file, 'rb')
         ihnd.seek(0, 2)
-        filesize = ihnd.tell()
+        filesize = ihnd.tell() - 8 # Remove filesize
         if filesize < 32:
             print_err("File is too short to be decrypted")
             return False
-        if filesize % 16 != 0:
+        if filesize % 16 != 0: # Remove filesize
             print_err("File size must be multiple of 16")
             return False
         ihnd.seek(0, 0)
         #Read first 16 bytes (IV)
         iv = ihnd.read(16)
-        lastn = iv[15] & 0x0F
         print_info("IV is %s" % hexlify(iv))
         #AES key is MD5sum between the crypter key and the IV
         digest = hash_md5()
@@ -227,8 +232,10 @@ def decrypt_file(input_file: str, output_file: str, crypter_key: str) -> bool:
             key_opad[i] = 0x5C ^ aes_key[i]
         datasize = filesize - 32 #filesize - IV - HMAC
         #Get HMAC
-        ihnd.seek(-16, 2) #Last 16 bytes
+        ihnd.seek(-24, 2) #Last 24 bytes
         final_hmac_in = ihnd.read(16)
+        lastn = ihnd.read(8) # Data size
+        native_data_size = int.from_bytes(lastn, "big")
         #Verify HMAC before decrypting
         digest = hash_md5()
         digest.update(key_ipad)
@@ -258,13 +265,13 @@ def decrypt_file(input_file: str, output_file: str, crypter_key: str) -> bool:
             offset = 0
             while offset < datasize: # <= cause we're already at 16 (imagine if filesize were 48, datasize would be 16)
                 input_block = bytearray()
-                input_block.extend(ihnd.read(16))
+                input_block.extend(ihnd.read(BLOCK_SIZE))
                 #Encrypt block and append to encrypted data
                 decrypted_block = crypter.decrypt(bytes(input_block))
                 #Write decrypted block (only block length)
-                offset += 16
-                if lastn > 0 and offset == datasize: #Write remaining bytes
-                    ohnd.write(decrypted_block[0:lastn])
+                offset += BLOCK_SIZE
+                if native_data_size > 0 and offset >= datasize: #Write remaining bytes
+                    ohnd.write(decrypted_block[0:native_data_size])
                 else:
                     ohnd.write(decrypted_block) #Write entire block otherwise
             #Close file
