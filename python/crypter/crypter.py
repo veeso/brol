@@ -35,6 +35,7 @@ from typing import Optional
 PROGRAM_NAME = "crypter.py"
 USAGE = "%s [OPTIONS...] [INPUT_FILE] [OUTPUT_FILE]\n\
     Where options are:\n\
+    \t-b\t<block_size>\tDefine block size (default: 4096B)\n\
     \t-d\t\t\tDecrypt file\n\
     \t-e\t\t\tEncrypt file\n\
     \t-k\t\t\tKey used to encrypt/decrypt file\n\
@@ -52,7 +53,7 @@ KMAG = "\x1B[35m"
 KCYN = "\x1B[36m"
 KWHT = "\x1B[37m"
 
-BLOCK_SIZE = 4096
+DEFAULT_BLOCK_SIZE = 4096
 
 verbose = False
 
@@ -110,7 +111,7 @@ def print_progress_bar (iteration: int, total: int, prefix: Optional[str] = '', 
     if iteration >= total: 
         print()
 
-def encrypt_file(input_file: str, output_file: str, crypter_key: str) -> bool:
+def encrypt_file(input_file: str, output_file: str, crypter_key: str, block_size: int = DEFAULT_BLOCK_SIZE) -> bool:
     """
     Encrypt a file using AES/HMAC MD5 using the provided Key
 
@@ -169,11 +170,11 @@ def encrypt_file(input_file: str, output_file: str, crypter_key: str) -> bool:
             ohnd.write(iv)
             #Read, Encrypt and write
             index = 0
-            input_block = bytearray(BLOCK_SIZE)
+            input_block = bytearray(block_size)
             progress = 0
             while index < filesize:
-                size = BLOCK_SIZE
-                if filesize - index < BLOCK_SIZE:
+                size = block_size
+                if filesize - index < block_size:
                     size = filesize - index
                 for i in range(size):
                     input_block[i] = ord(ihnd.read(1))
@@ -211,7 +212,7 @@ def encrypt_file(input_file: str, output_file: str, crypter_key: str) -> bool:
     print_info("Encrypted data written to %s" % output_file)
     return True
 
-def decrypt_file(input_file: str, output_file: str, crypter_key: str) -> bool:
+def decrypt_file(input_file: str, output_file: str, crypter_key: str, block_size: int = DEFAULT_BLOCK_SIZE) -> bool:
     """
     Decrypt a file using AES/HMAC MD5 using the provided Key
 
@@ -292,11 +293,11 @@ def decrypt_file(input_file: str, output_file: str, crypter_key: str) -> bool:
             progress = 0
             while offset < datasize: # <= cause we're already at 16 (imagine if filesize were 48, datasize would be 16)
                 input_block = bytearray()
-                input_block.extend(ihnd.read(BLOCK_SIZE))
+                input_block.extend(ihnd.read(block_size))
                 #Encrypt block and append to encrypted data
                 decrypted_block = crypter.decrypt(bytes(input_block))
                 #Write decrypted block (only block length)
-                offset += BLOCK_SIZE
+                offset += block_size
                 if native_data_size > 0 and offset >= datasize: #Write remaining bytes
                     ohnd.write(decrypted_block[0:native_data_size])
                 else:
@@ -323,11 +324,14 @@ def main(argc: int, argv: list) -> int:
     crypter_key = None
     input_file = None
     output_file = None
+    block_size = DEFAULT_BLOCK_SIZE
     try:
-        optlist, args = getopt(argv, "edk:f:vh")
+        optlist, args = getopt(argv, "b::edk::f::vh")
         #Iterate over options
         for opt, arg in optlist:
-            if opt == "-d":
+            if opt == "-b":
+                block_size = int(arg)
+            elif opt == "-d":
                 crypter_mode = CrypterMode.DECRYPT
             elif opt == "-e":
                 crypter_mode = CrypterMode.ENCRYPT
@@ -366,10 +370,10 @@ def main(argc: int, argv: list) -> int:
         return 1
     #Encrypt/Decrypt file
     if crypter_mode == CrypterMode.ENCRYPT:
-        if not encrypt_file(input_file, output_file, crypter_key):
+        if not encrypt_file(input_file, output_file, crypter_key, block_size):
             return 1
     elif crypter_mode == CrypterMode.DECRYPT:
-        if not decrypt_file(input_file, output_file, crypter_key):
+        if not decrypt_file(input_file, output_file, crypter_key, block_size):
             return 1
     else:
         print_err("Nothing to do")
