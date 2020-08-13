@@ -263,6 +263,7 @@ def decrypt_file(input_file: str, output_file: str, crypter_key: str, block_size
         final_hmac_in = ihnd.read(16)
         lastn = ihnd.read(8) # Data size
         native_data_size = int.from_bytes(lastn, "big")
+        print_info("Decrypted file size will be %d (read from last 8 bytes)" % native_data_size)
         #Verify HMAC before decrypting
         digest = hash_md5()
         digest.update(key_ipad)
@@ -285,6 +286,7 @@ def decrypt_file(input_file: str, output_file: str, crypter_key: str, block_size
             return False
         #Return to 16th byte
         ihnd.seek(16, 0)
+        final_size = 0
         #Read and decrypt
         try:
             #Open output file
@@ -298,10 +300,14 @@ def decrypt_file(input_file: str, output_file: str, crypter_key: str, block_size
                 decrypted_block = crypter.decrypt(bytes(input_block))
                 #Write decrypted block (only block length)
                 offset += block_size
-                if native_data_size > 0 and offset >= datasize: #Write remaining bytes
-                    ohnd.write(decrypted_block[0:native_data_size])
+                if native_data_size > 0 and offset == datasize: #Write remaining bytes
+                    # Remaining bytes
+                    remaining_bytes = native_data_size % block_size
+                    ohnd.write(decrypted_block[0:remaining_bytes])
+                    final_size += remaining_bytes
                 else:
                     ohnd.write(decrypted_block) #Write entire block otherwise
+                    final_size += block_size
                 progress = (offset * 100) / datasize
                 print_progress_bar(progress, 100)
             #Close file
@@ -309,7 +315,7 @@ def decrypt_file(input_file: str, output_file: str, crypter_key: str, block_size
         except IOError as err:
             print_err("IOError: %s" % err)
             return False
-        print_info("Data decrypted (%d bytes)" % datasize)
+        print_info("Data decrypted (%d bytes)" % final_size)
         #Close file
         ihnd.close()
     except IOError as err:
