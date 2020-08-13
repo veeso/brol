@@ -33,7 +33,9 @@ Developed by Christian Visintin
 
 ### CPP
 
+- **[aixlog](cpp/aixlog/main.cpp)**: Aixlog example implementation
 - **[base64pp](cpp/base64pp)**: Simple base64 library in C++
+- **[cli11](cpp/cli11)**: Simple CLI11 example
 - **[fstream-doesnot-throw](cpp/fstream-doesnot-throw)**: nothing, just a proof that fstream doesn't throw if was not possible to open it
 - **[ftpcurlpp](cpp/ftpcurlpp)**: Ever wondered how to use curlpp with FTP? I did and I couldn't find any example on how to use it...
 - **[getdir](cpp/getdir)**: Get all files in a directry
