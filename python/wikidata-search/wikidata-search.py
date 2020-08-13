@@ -166,9 +166,6 @@ def process_entity(entity: dict, language: str) -> bool:
                     if instanceof_value == "Q5":
                         print_info("Entity is a person")
                         return process_human_entity(entity, language)
-                    elif instanceof_value in TOPIC_TABLE:
-                        print_info("Entity is a topic")
-                        return process_topic_entity(entity, language)
     print_info("Entity is not a person")
     return True
 
