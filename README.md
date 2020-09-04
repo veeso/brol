@@ -41,6 +41,7 @@ Developed by Christian Visintin
 - **[getdir](cpp/getdir)**: Get all files in a directry
 - **[libzip](cpp/libzip)**: An example which shows how to use libzip
 - **[logrotator](cpp/logrotator)**: A simple log rotator library in c++
+- **[lunasvg](cpp/lunasvg)**: Convert SVG to PNG using [liblunasvg](https://github.com/sammycage/lunasvg) and libpng 
 - **[lz4](cpp/lz4)**: an example on how to use lz4 in c++
 - **[mosquittopp](cpp/mosquittopp)**: an example on how to use mosquittopp in c++
 - **[nlohmann-query](cpp/nlohmann-query)**: An algorithm to make recursive query in nlohmann (e.g. find a.b[1].c in a JSON)
