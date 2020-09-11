@@ -169,12 +169,12 @@ def split_file(src: str, dest: str, max_size: int) -> bool:
     :returns bool
     """
     try:
-        dest_stream = open(dest, "w")
+        dest_stream = open(dest, "w", errors="replace")
     except IOError as err:
         print_err("Could not open file %s: %s" % (dest, err))
         return False
     try:
-        src_stream = open(src, "r+")
+        src_stream = open(src, "r+", errors="replace")
     except IOError as err:
         print_err("Could not open file %s: %s" % (src, err))
         dest_stream.close()
