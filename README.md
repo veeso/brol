@@ -69,6 +69,7 @@ Developed by Christian Visintin
 ### PHP
 
 - **[json-node](php/json-node)**: find a JSON leaf through query
+- **[requests](php/requests)**: Send GET/POST requests using PHP with cURL
 
 ---
 
