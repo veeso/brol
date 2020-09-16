@@ -70,6 +70,7 @@ Developed by Christian Visintin
 
 - **[json-node](php/json-node)**: find a JSON leaf through query
 - **[requests](php/requests)**: Send GET/POST requests using PHP with cURL
+- **[resize-image](php/resize-image)**: Resize an image using Imagick
 
 ---
 
