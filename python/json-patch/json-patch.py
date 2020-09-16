@@ -59,17 +59,6 @@ def print_success(message: str):
     if verbose:
         print("%s%s%s" % (KGRN, message, KNRM))
 
-def opt_err(message: str):
-    """
-    Function to call in case of an error while parsing options and terminates with exit code 255
-
-    :param message: message to write
-    :type message: str
-    """
-    print_err("Option Error: %s" % message)
-    print(USAGE)
-    exit(255)
-
 def read_json(file: str) -> dict:
     """
     Read JSON file
@@ -127,7 +116,7 @@ def main(argc: int, argv: list) -> int:
     # Get options
     parser = ArgumentParser(description="Add missing keys from one JSON into another")
     parser.add_argument("-o", "--output", help="specify a different output file")
-    parser.add_argument("-p", "--indentsize", help="Specify the JSON indent size", default=0)
+    parser.add_argument("-p", "--indentsize", type=int, help="Specify the JSON indent size", default=0)
     parser.add_argument("-v", "--verbose", action="store_true", help="Verbose", default=False)
     parser.add_argument("--exclude", action="append", help="Specify a key to exclude")
     parser.add_argument("SOURCE", help="Specify source JSON file")
