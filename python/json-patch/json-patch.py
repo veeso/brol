@@ -8,20 +8,13 @@ This script can be useful when updating the scheme of a JSON configuration file 
 """
 
 # Getopt
-from getopt import getopt, GetoptError
+from argparse import ArgumentParser
 # JSON
 import json
 # System
 from sys import argv, exit
-
-
-PROGRAM_NAME = "json-patch"
-USAGE = "%s [OPTIONS]... [SOURCE] [FILE]\n\
-    \t-o\t[output_file]\t\tSpecify a different output file (default: FILE)\n\
-    \t-p\t[space_size]\t\tPretty print\n\
-    \t-v\t\t\t\tVerbose\n\
-    \t-h\t\t\t\tShow this page\n\
-    " % PROGRAM_NAME
+# Typings
+from typing import List
 
 KNRM = "\x1B[0m"
 KRED = "\x1B[31m"
@@ -92,27 +85,33 @@ def read_json(file: str) -> dict:
     return json.loads(data)
 
 
-def patch_json(src: dict, dest: dict, tree = ""):
+def patch_json(src: dict, dest: dict, exclude: List[str] = [], tree = ""):
     """
     Import all src's keys which are missing to dest
 
     :param src: source dictionary
     :param dest: destination dictionary
+    :param exclude: a list of keys to exclude from patch
     :param tree: current key tree name
     :type src: dict
     :type dest: dict
+    :type exclude: List[str]
     :type tree: str
     """
     # Iterate over keys
     for key, value in src.items():
         new_tree = "%s.%s" % (tree, key)
         print_info("Checking key %s" % new_tree)
+        # If key is in exclude list; continue
+        if new_tree in exclude:
+            print_info("Ignored key %s since in excluded list" % new_tree)
+            continue
         # Check if key exists in dest
         if key in dest: # Key exists in dest
             # If src[key] and dest[key] is an object or a list, patch node
             if type(src[key]) == dict and type(dest[key]) == dict:
                 print_info("%s exists in dest; checking child..." % new_tree)
-                patch_json(src[key], dest[key], tree=new_tree)
+                patch_json(src[key], dest[key], exclude=exclude, tree=new_tree)
         else:
             # Copy src[key] to dest
             print_success("Added %s to dest" % new_tree)
@@ -125,31 +124,21 @@ def main(argc: int, argv: list) -> int:
     dest_file = None
     out_file = None
     pretty_print = None
-    #Get options
-    try:
-        optlist, args = getopt(argv, "o::p::vh")
-        #Iterate over options
-        for opt, arg in optlist:
-            if opt == "-o":
-                out_file = arg
-            elif opt == "-p":
-                pretty_print = int(arg)
-            elif opt == "-v":
-                verbose = True
-            elif opt == "-h":
-                print(USAGE)
-                return 255
-        #Look for logfile
-        if args:
-            if len(args) >= 2:
-                source_file = args[0]
-                dest_file = args[1]
-            else:
-                opt_err("Missing args")
-        else:
-            opt_err("Missing args")
-    except GetoptError as err:
-        opt_err(err)
+    # Get options
+    parser = ArgumentParser(description="Add missing keys from one JSON into another")
+    parser.add_argument("-o", "--output", help="specify a different output file")
+    parser.add_argument("-p", "--indentsize", help="Specify the JSON indent size", default=0)
+    parser.add_argument("-v", "--verbose", action="store_true", help="Verbose", default=False)
+    parser.add_argument("--exclude", action="append", help="Specify a key to exclude")
+    parser.add_argument("SOURCE", help="Specify source JSON file")
+    parser.add_argument("FILE", help="Specify destination JSON file")
+    args = parser.parse_args(argv)
+    source_file = args.SOURCE
+    dest_file = args.FILE
+    out_file = args.output
+    pretty_print = args.indentsize
+    exclude = args.exclude
+    verbose = args.verbose
     if not out_file:
         out_file = dest_file
     # Read json
@@ -170,7 +159,7 @@ def main(argc: int, argv: list) -> int:
         print_err("Could not decode file %s: %s" % (dest_file, err))
         return 1
     # Patch file
-    patch_json(source, dest)
+    patch_json(source, dest, exclude=exclude)
     # Write out json
     try:
         hnd = open(out_file, 'w')
