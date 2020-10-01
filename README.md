@@ -103,6 +103,9 @@ Developed by Christian Visintin
 
 - **[console](rust/console)**: Console utils
 - **[file-utils](rust/file-utils)**: File utilities
+- **[git](rust/git)**: Git utilities. **GPL3 License**
+- **[pipe](rust/pipe)**: UNIX Pipes Façade for Rust. **GPL3 License**
+- **[subproc](rust/subproc)**: UNIX subprocess with named pipes. **GPL3 License**
 
 ---
 
