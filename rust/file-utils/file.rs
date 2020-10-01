@@ -7,9 +7,25 @@ use std::fs::OpenOptions;
 use std::io::{self, BufRead, Write};
 use std::path::Path;
 
+
+/// ### open_file
+/// 
+/// Open file provided as parameter
+pub fn open_file<P>(filename: P, create: bool, write: bool, append: bool) -> io::Result<File> where P: AsRef<Path>, {
+    OpenOptions::new().create(create).write(write).append(append).truncate(!append).open(filename)
+}
+
+/// ### read_file
+/// 
+/// Read entire file
+pub fn read_file<P>(filename: P) -> io::Result<String> where P: AsRef<Path>, {
+    std::fs::read_to_string(filename)
+}
+
 /// ### read_lines
 /// 
 /// Read lines from file
+#[allow(dead_code)]
 pub fn read_lines<P>(filename: P) -> io::Result<Vec<String>> where P: AsRef<Path>, {
     let file: File = File::open(filename)?;
     let reader = io::BufReader::new(file).lines();
@@ -25,8 +41,9 @@ pub fn read_lines<P>(filename: P) -> io::Result<Vec<String>> where P: AsRef<Path
 /// ### write_lines
 /// 
 /// Write lines to file
+#[allow(dead_code)]
 pub fn write_lines<P>(filename: P, lines: Vec<String>) -> io::Result<()> where P: AsRef<Path> {
-    match OpenOptions::new().create(true).write(true).append(false).truncate(true).open(filename) {
+    match open_file(filename, true, true, false) {
         Ok(mut f) => {
             for line in lines.iter() {
                 writeln!(f, "{}", line)?;
@@ -41,6 +58,21 @@ pub fn write_lines<P>(filename: P, lines: Vec<String>) -> io::Result<()> where P
 mod tests {
     use super::*;
     use std::io::Write;
+
+    #[test]
+    fn test_utils_file_open() {
+        let tmpfile: tempfile::NamedTempFile = tempfile::NamedTempFile::new().unwrap();
+        assert!(open_file(tmpfile.path(), true, true, true).is_ok());
+    }
+
+    #[test]
+    fn test_utils_file_read_file() {
+        let sample_file: tempfile::NamedTempFile = write_sample_file();
+        let res: io::Result<String> = read_file(sample_file.path());
+        assert!(res.is_ok());
+        let lines: String = res.unwrap();
+        assert_eq!(lines, String::from("Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nMauris ultricies consequat eros,\nnec scelerisque magna imperdiet metus.\n"));
+    }
 
     #[test]
     fn test_utils_file_read_lines() {
