@@ -41,6 +41,8 @@ void print_progress_bar(size_t it, size_t max, const char* prefix, const char* s
   printf("\r%s", progress_bar_fmt);
   if (it >= max) { // New line if ended
     printf("\n");
+  } else {
+    fflush(stdout); // Flush stdout 
   }
 }
 
