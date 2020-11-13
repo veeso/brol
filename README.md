@@ -1,6 +1,6 @@
 # Brol
 
-*Brol ~ en Belgique: Désordre, bazar.*
+*Brol ~ en Français de Belgique: Désordre, bazar.*
 
 Developed by Christian Visintin
 
@@ -24,7 +24,9 @@ Developed by Christian Visintin
 - **[easyfb](c/easyfb)**: simple library to interact with the framebuffer (read/write you know). **MIT license**
 - **[elapsed-ms](c/elapsed-us)**: How to get elapsed time in microseconds
 - **[jannson](c/jannson)**: an example which shows how to use jannson JSON library
+- **[progress_bar](c/progress_bar)**: A simple progres bar in C
 - **[settimeofday](c/settimeofday)**: An example program which shows how to set system time
+- **[sigint](c/sigint)**: A simple SIGINT handler
 - **[traslate-bit-size](c/traslate-bit-size)**: Traslate a numeric value into another bit power (e.g. 31,5 => 255,8)
 - **[TunTap](c/TunTap)**: create and perform I/O on TUN/TAPs
 - **[uintToAscii](c/uintToAscii)**: a converter for uintx_t to ASCII buffer
