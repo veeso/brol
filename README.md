@@ -107,6 +107,9 @@ Developed by Christian Visintin
 - **[file-utils](rust/file-utils)**: File utilities
 - **[git](rust/git)**: Git utilities. **GPL3 License**
 - **[pipe](rust/pipe)**: UNIX Pipes Façade for Rust. **GPL3 License**
+- **[ssh-client](rust/ssh-client)**: Just a minimalist SSH client.
+  - Requires [rpassword](https://github.com/conradkleinespel/rpassword)
+  - Requires [ssh2-rs](https://github.com/alexcrichton/ssh2-rs)
 - **[subproc](rust/subproc)**: UNIX subprocess with named pipes. **GPL3 License**
 
 ---
