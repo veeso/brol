@@ -108,6 +108,10 @@ Developed by Christian Visintin
 - **[git](rust/git)**: Git utilities. **GPL3 License**
 - **[pipe](rust/pipe)**: UNIX Pipes Façade for Rust. **GPL3 License**
 - **[progress_bar](rust/progress_bar)**: Simple progress bar in rust.
+- **[sftp-client](rust/sftp-client)**: Just a minimalist SFTP CLI client. (Don't complain about error handling)
+  - Requires [chrono](https://github.com/chronotope/chrono)
+  - Requires [rpassword](https://github.com/conradkleinespel/rpassword)
+  - Requires [ssh2-rs](https://github.com/alexcrichton/ssh2-rs)
 - **[ssh-client](rust/ssh-client)**: Just a minimalist SSH client.
   - Requires [rpassword](https://github.com/conradkleinespel/rpassword)
   - Requires [ssh2-rs](https://github.com/alexcrichton/ssh2-rs)
