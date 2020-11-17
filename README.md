@@ -24,6 +24,7 @@ Developed by Christian Visintin
 - **[easyfb](c/easyfb)**: simple library to interact with the framebuffer (read/write you know). **MIT license**
 - **[elapsed-ms](c/elapsed-us)**: How to get elapsed time in microseconds
 - **[jannson](c/jannson)**: an example which shows how to use jannson JSON library
+- **[getline](c/getline)**: I reimplemented getline in case it's necessary
 - **[progress_bar](c/progress_bar)**: A simple progres bar in C
 - **[settimeofday](c/settimeofday)**: An example program which shows how to set system time
 - **[sigint](c/sigint)**: A simple SIGINT handler
