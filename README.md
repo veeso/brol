@@ -86,8 +86,9 @@ Developed by Christian Visintin
 - **[logrotate-cli](python/logrotate-cli)**: CLI application which can be used to rotate logs. Is not a daemon, must be called manually. *I Should really make a Pypi binary out of this*
 - **[modem-utils](python/modem-utils)**: Utility to query modem
 - **[json-patch](python/json-patch)**: Utility to apply missing keys from one JSON into another
+- **[netaddr-calc](python/netaddr-calc)**: Utility to calculate network addresses and stuff like that
 - **[struncate](python/struncate)**: I swear nobody has ever did this before. A damn function to truncate the first n bytes from a file **without** creating a new one.
-- **[subvar](python/subvar)**: Replace ```$VARIABLES``` and ```${VARIABLES}``` in files using environment.
+- **[subvar](python/subvar)**: Replace `$VARIABLES` and `${VARIABLES}` in files using environment.
 - **[wikidata-search](python/wikidata-search)**: Simple Python3 script which searches on wikidata the provided input and if the result is a person, retrieves metadata for it
 
 ---
