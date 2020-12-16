@@ -105,6 +105,7 @@ Developed by Christian Visintin
 
 ### Rust
 
+- **[chrono](rust/chrono/main.rs)**: utilities I've used in some projects, using the [chrono crate](https://github.com/chronotope/chrono)
 - **[console](rust/console)**: Console utils
 - **[file-utils](rust/file-utils)**: File utilities
 - **[git](rust/git)**: Git utilities. **GPL3 License**
