@@ -108,6 +108,7 @@ Developed by Christian Visintin
 - **[console](rust/console)**: Console utils
 - **[file-utils](rust/file-utils)**: File utilities
 - **[git](rust/git)**: Git utilities. **GPL3 License**
+- **[magic-crypt](rust/magic-crypt/main.rs)**: Encryption/decryption example using [magic-crypt](https://github.com/magiclen/rust-magiccrypt)
 - **[pipe](rust/pipe)**: UNIX Pipes Façade for Rust. **GPL3 License**
 - **[progress_bar](rust/progress_bar)**: Simple progress bar in rust.
 - **[sftp-client](rust/sftp-client)**: Just a minimalist SFTP CLI client. (Don't complain about error handling)
