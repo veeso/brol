@@ -121,6 +121,7 @@ Developed by Christian Visintin
   - Requires [rpassword](https://github.com/conradkleinespel/rpassword)
   - Requires [ssh2-rs](https://github.com/alexcrichton/ssh2-rs)
 - **[subproc](rust/subproc)**: UNIX subprocess with named pipes. **GPL3 License**
+- **[test-keyring](rust/test-keyring)**: An example of the `keyring-rs` crate
 
 ---
 
