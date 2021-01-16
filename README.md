@@ -109,6 +109,7 @@ Developed by Christian Visintin
 - **[chrono](rust/chrono/main.rs)**: utilities I've used in some projects, using the [chrono crate](https://github.com/chronotope/chrono)
 - **[console](rust/console)**: Console utils
 - **[file-utils](rust/file-utils)**: File utilities
+- **[keyring-client](rust/keyring-client)**: A rust keyring client, which uses `keyring-rs` to interact with your secret storage.
 - **[git](rust/git)**: Git utilities. **GPL3 License**
 - **[magic-crypt](rust/magic-crypt/main.rs)**: Encryption/decryption example using [magic-crypt](https://github.com/magiclen/rust-magiccrypt)
 - **[pipe](rust/pipe)**: UNIX Pipes Façade for Rust. **GPL3 License**
@@ -121,7 +122,6 @@ Developed by Christian Visintin
   - Requires [rpassword](https://github.com/conradkleinespel/rpassword)
   - Requires [ssh2-rs](https://github.com/alexcrichton/ssh2-rs)
 - **[subproc](rust/subproc)**: UNIX subprocess with named pipes. **GPL3 License**
-- **[test-keyring](rust/test-keyring)**: An example of the `keyring-rs` crate
 
 ---
 
