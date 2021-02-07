@@ -56,6 +56,12 @@ Developed by Christian Visintin
 
 ---
 
+### Elm
+
+- **[json-decoder](elm/json-decoder)**: Basic elm decoder for elm
+
+---
+
 ### Java
 
 - **[ISO3166](java/ISO3166)**: ISO3166 utils
