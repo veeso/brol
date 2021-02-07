@@ -1,10 +1,10 @@
 module Main exposing (User)
 
-import Html exposing (..)
 import Browser
-import Http
-import Json.Decode exposing (Decoder, bool, field, null, oneOf, string)
+import Html exposing (..)
 import Html.Attributes exposing (src)
+import Http
+import Json.Decode exposing (Decoder, bool, field, map4, maybe, string)
 
 
 type alias User =
@@ -26,6 +26,7 @@ main =
 
 
 -- Model
+-- Our model is a state machine, with 3 states: Success when ready to show data, Loading when loading data, Error when unable to gather data
 
 
 type Model
@@ -47,9 +48,9 @@ update msg _ =
     case msg of
         GotUser result ->
             case result of
-                Ok json ->
+                Ok user ->
                     -- Parse json
-                    ( Success json, Cmd.none )
+                    ( Success user, Cmd.none )
 
                 Err err ->
                     ( Error (fmtHttpError err), Cmd.none )
@@ -68,61 +69,78 @@ init _ =
         }
     )
 
+
+
 -- SUBSCRIPTIONS
 
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
-  Sub.none
+    Sub.none
+
+
 
 -- View
 
+
 view : Model -> Html Msg
 view model =
-  div []
-    [ h2 [] [ text "Random Cats" ]
-    , viewUser model
-    ]
+    div []
+        [ h2 [] [ text "User from remote" ]
+        , viewUser model
+        ]
+
 
 viewUser : Model -> Html Msg
 viewUser model =
-  case model of
-    Error err ->
-      div []
-        [ text ("Could not get users: " ++ err)
-        ]
+    case model of
+        Error err ->
+            div []
+                [ text ("Could not get users: " ++ err)
+                ]
 
-    Loading ->
-      text "Loading..."
+        Loading ->
+            text "Loading..."
 
-    Success user ->
-      div []
-        [ h3 [] [ text user.username ]
-        , h4 [] [ text user.lastActvity ]
-        , h4 [] [ text ( if user.online then
-              "Online"
-            else
-              "Offline"
-           ) ] 
-        , viewAvatar user.avatar
-        ]
+        Success user ->
+            div []
+                [ h3 [] [ text user.username ]
+                , h4 [] [ text user.lastActvity ]
+                , h4 []
+                    [ text
+                        (if user.online then
+                            "Online"
+
+                         else
+                            "Offline"
+                        )
+                    ]
+                , viewAvatar user.avatar
+                ]
+
 
 viewAvatar : Maybe String -> Html Msg
-viewAvatar avatar = 
-  case avatar of
-    Just imgSrc ->
-      img [src imgSrc] []
-    Nothing ->
-      img [src "/assets/fallback"] []
+viewAvatar avatar =
+    case avatar of
+        Just imgSrc ->
+            img [ src imgSrc ] []
+
+        Nothing ->
+            span [] [ text "This guy has no avatar" ]
+
+
 
 -- User decoder
 
+
 userDecoder : Decoder User
 userDecoder =
-    field "username" string
-    |> field "lastActivity" string
-    |> field "online" bool
-    |> field "avatar" (oneOf [ string, null ])
+    map4 User
+        (field "username" string)
+        (maybe (field "avatar" string))
+        (field "online" bool)
+        (field "lastActivity" string)
+
 
 fmtHttpError : Http.Error -> String
 fmtHttpError error =

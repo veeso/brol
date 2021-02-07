@@ -3,6 +3,20 @@
     "username": "pippo",
     "lastActivity": "2021-02-07T14:43:00Z",
     "online": true,
-    "avatar": "/assets/avatar/pippo.png"
-  }
+    "avatar": "/assets/avatar/doggo.jpg"
+  },
+  "users": [
+    {
+      "username": "ommlar",
+      "lastActivity": "2021-02-07T14:43:00Z",
+      "online": true,
+      "avatar": "/assets/avatar/doggo.jpg"
+    },
+    {
+      "username": "zio",
+      "lastActivity": "2021-0129T18:32:12Z",
+      "online": false,
+      "avatar": null
+    }
+  ]
 }
