@@ -59,6 +59,7 @@ Developed by Christian Visintin
 
 ### Elm
 
+- **[json-custom-type-decoder](elm/json-custom-type-decoder)**: Implementation of a JSON decoder for a custom type (Date.Date)
 - **[json-decoder](elm/json-decoder)**: Basic JSON decoder for a single entity
 - **[json-decoder-list](elm/json-decoder-list)**: Basic JSON decoder for a list entities of the same type
 
