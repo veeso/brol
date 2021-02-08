@@ -1,0 +1,28 @@
+{
+  "user": {
+    "username": "pippo",
+    "lastActivity": "2021-02-07T14:43:00Z",
+    "online": true,
+    "avatar": "/assets/avatar/doggo.jpg"
+  },
+  "users": [
+    {
+      "username": "ommlar",
+      "lastActivity": "2021-02-07T14:43:00Z",
+      "online": true,
+      "avatar": "/assets/avatar/doggo.jpg"
+    },
+    {
+      "username": "zio",
+      "lastActivity": "2021-01-29T18:32:12Z",
+      "online": false,
+      "avatar": null
+    },
+    {
+      "username": "Lucia",
+      "lastActivity": "2021-02-03T16:12:32Z",
+      "online": false,
+      "avatar": "/assets/avatar/charlie.jpg"
+    }
+  ]
+}

@@ -8,6 +8,7 @@ Developed by Christian Visintin
   - [Projects](#projects)
     - [C](#c)
     - [CPP](#cpp)
+	- [Elm](#elm)
     - [Java](#java)
     - [JavaScript](#javascript)
     - [PHP](#php)
@@ -58,7 +59,8 @@ Developed by Christian Visintin
 
 ### Elm
 
-- **[json-decoder](elm/json-decoder)**: Basic elm decoder for elm
+- **[json-decoder](elm/json-decoder)**: Basic JSON decoder for a single entity
+- **[json-decoder-list](elm/json-decoder-list)**: Basic JSON decoder for a list entities of the same type
 
 ---
 
