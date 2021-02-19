@@ -8,7 +8,7 @@ Developed by Christian Visintin
   - [Projects](#projects)
     - [C](#c)
     - [CPP](#cpp)
-	- [Elm](#elm)
+    - [Elm](#elm)
     - [Java](#java)
     - [JavaScript](#javascript)
     - [PHP](#php)
@@ -62,6 +62,7 @@ Developed by Christian Visintin
 - **[json-custom-type-decoder](elm/json-custom-type-decoder)**: Implementation of a JSON decoder for a custom type (Date.Date)
 - **[json-decoder](elm/json-decoder)**: Basic JSON decoder for a single entity
 - **[json-decoder-list](elm/json-decoder-list)**: Basic JSON decoder for a list entities of the same type
+- **[utils](elm/utils)**: Elm utilities
 
 ---
 
