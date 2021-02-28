@@ -1,0 +1,11 @@
+[package]
+name = "git-latest-release"
+version = "0.1.0"
+authors = ["veeso <christian.visintin1997@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+ureq = { version = "2.0.2", features = ["json"] }
+serde = { version = "1.0.121", features = ["derive"] }

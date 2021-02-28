@@ -127,6 +127,7 @@ Developed by Christian Visintin
 - **[file-utils](rust/file-utils)**: File utilities
 - **[keyring-client](rust/keyring-client)**: A rust keyring client, which uses `keyring-rs` to interact with your secret storage.
 - **[git](rust/git)**: Git utilities. **GPL3 License**
+- **[git-latest-release](rust/git-latest-release)**: Get through git API the latest release for a repository
 - **[magic-crypt](rust/magic-crypt/main.rs)**: Encryption/decryption example using [magic-crypt](https://github.com/magiclen/rust-magiccrypt)
 - **[pipe](rust/pipe)**: UNIX Pipes Façade for Rust. **GPL3 License**
 - **[progress_bar](rust/progress_bar)**: Simple progress bar in rust.
