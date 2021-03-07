@@ -131,6 +131,7 @@ Developed by Christian Visintin
 - **[magic-crypt](rust/magic-crypt/main.rs)**: Encryption/decryption example using [magic-crypt](https://github.com/magiclen/rust-magiccrypt)
 - **[pipe](rust/pipe)**: UNIX Pipes Façade for Rust. **GPL3 License**
 - **[progress_bar](rust/progress_bar)**: Simple progress bar in rust.
+- **[refcounter](rust/refcounter/main.rs)**: Example with Rc.
 - **[sftp-client](rust/sftp-client)**: Just a minimalist SFTP CLI client. (Don't complain about error handling)
   - Requires [chrono](https://github.com/chronotope/chrono)
   - Requires [rpassword](https://github.com/conradkleinespel/rpassword)
