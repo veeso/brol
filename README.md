@@ -32,7 +32,7 @@ Developed by Christian Visintin
 - **[sigint](c/sigint)**: A simple SIGINT handler
 - **[traslate-bit-size](c/traslate-bit-size)**: Traslate a numeric value into another bit power (e.g. 31,5 => 255,8)
 - **[TunTap](c/TunTap)**: create and perform I/O on TUN/TAPs
-- **[uintToAscii](c/uintToAscii)**: a converter for uintx_t to ASCII buffer
+- **[uintToAscii](c/uintToAscii)**: a converter for uint8\_t to ASCII buffer
 - **[union](c/union)**: An example which shows how to use Union with data buffers and structures (verify useful for example for protocols).
 
 ---
