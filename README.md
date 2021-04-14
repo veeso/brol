@@ -16,6 +16,7 @@ Developed by Christian Visintin
     - [Qt](#qt)
     - [React](#react)
     - [Rust](#rust)
+    - [Shell](#shell)
   - [Code of conduct](#code-of-conduct)
   - [License](#license)
 
@@ -47,7 +48,7 @@ Developed by Christian Visintin
 - **[getdir](cpp/getdir)**: Get all files in a directry
 - **[libzip](cpp/libzip)**: An example which shows how to use libzip
 - **[logrotator](cpp/logrotator)**: A simple log rotator library in c++
-- **[lunasvg](cpp/lunasvg)**: Convert SVG to PNG using [liblunasvg](https://github.com/sammycage/lunasvg) and libpng 
+- **[lunasvg](cpp/lunasvg)**: Convert SVG to PNG using [liblunasvg](https://github.com/sammycage/lunasvg) and libpng
 - **[lz4](cpp/lz4)**: an example on how to use lz4 in c++
 - **[nlohmann-query](cpp/nlohmann-query)**: An algorithm to make recursive query in nlohmann (e.g. find a.b[1].c in a JSON)
 - **[plog](cpp/plog)**: Plog example implementation
@@ -141,6 +142,12 @@ Developed by Christian Visintin
   - Requires [rpassword](https://github.com/conradkleinespel/rpassword)
   - Requires [ssh2-rs](https://github.com/alexcrichton/ssh2-rs)
 - **[subproc](rust/subproc)**: UNIX subprocess with named pipes. **GPL3 License**
+
+---
+
+### Shell
+
+- **[Fish functions](shell/fish/functions.sh)**: Some utils functions for fish
 
 ---
 
