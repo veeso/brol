@@ -18,6 +18,7 @@ Developed by Christian Visintin
     - [Rust](#rust)
     - [Shell](#shell)
   - [Code of conduct](#code-of-conduct)
+  - [Buy me a coffee](#buy-me-a-coffee)
   - [License](#license)
 
 ## Projects
@@ -117,7 +118,7 @@ Developed by Christian Visintin
 
 ### React
 
-- **[auto-relative-time](react/AutoRelativeTime.jsx)**: Automatic relative time unit using react-intl
+- **[auto-relative-time](react/AutoRelativeTime.tsx)**: Automatic relative time unit using react-intl
 
 ---
 
@@ -154,6 +155,14 @@ Developed by Christian Visintin
 ## Code of conduct
 
 View repository [Code of conduct](CODE_OF_CONDUCT.md)
+
+---
+
+## Buy me a coffee
+
+If you like what I do, please consider a little donation 🥳
+
+[![Buy-me-a-coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=veeso&button_colour=404040&font_colour=ffffff&font_family=Comic&outline_colour=ffffff&coffee_colour=FFDD00)](https://www.buymeacoffee.com/veeso)
 
 ---
 

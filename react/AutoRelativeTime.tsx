@@ -5,7 +5,6 @@
 
 import React from "react";
 import { FormattedRelativeTime } from "react-intl";
-import PropTypes from "prop-types";
 
 interface OwnProps {
   seconds: number;
@@ -27,8 +26,4 @@ export default function AutoRelativeTime(props: OwnProps) {
     return <FormattedRelativeTime value={-props.seconds} unit="second" />;
   }
 }
-
-AutoRelativeTime.PropTypes = {
-  second: PropTypes.number.isRequired,
-};
 
