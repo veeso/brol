@@ -4,6 +4,8 @@
 
 Developed by Christian Visintin
 
+Brol is a repository with all those useful code snippets and tools written during my career as developer.
+
 - [Brol](#brol)
   - [Projects](#projects)
     - [C](#c)
@@ -95,6 +97,7 @@ Developed by Christian Visintin
 
 - **[base64-cli](python/base64)**: Base64 CLI encoder/decoder written in Python3
 - **[crypter](python/crypter)**: AES CLI encrypter/decrypter written in Python3
+- **[github-downloads](python/github-downloads/github-downloads.py)**: Collect download counts for each artifact you want for all the releases of a certain repository
 - **[logrotate-cli](python/logrotate-cli)**: CLI application which can be used to rotate logs. Is not a daemon, must be called manually. *I Should really make a Pypi binary out of this*
 - **[modem-utils](python/modem-utils)**: Utility to query modem
 - **[json-patch](python/json-patch)**: Utility to apply missing keys from one JSON into another
