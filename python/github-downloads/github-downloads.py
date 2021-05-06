@@ -159,4 +159,4 @@ def main(argc: int, argv: List[str]) -> int:
 
 # Entry point
 if __name__ == "__main__":
-    exit(main(len(argv), argv[1:]))
+    exit(main(len(argv[1:]), argv[1:]))
