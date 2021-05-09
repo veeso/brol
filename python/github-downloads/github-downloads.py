@@ -123,6 +123,14 @@ def collect_asset_stats(asset: dict, blacklist: List[str]) -> Optional[Tuple[str
         download_count: int = asset["download_count"]
         return (asset_name, download_count)
 
+def calculate_version_downloads(counters: List[int]) -> int:
+    """
+    Calculate version downloads
+    
+    :param counters
+    """
+    return sum(counters)
+
 def print_stats_table(repo: str, release: Tuple[str, List[Tuple[str, int]]]):
     """
     Print stats table for a single release
@@ -130,6 +138,8 @@ def print_stats_table(repo: str, release: Tuple[str, List[Tuple[str, int]]]):
     :param repo
     :param release
     """
+    # Push total downloads to version
+    release[1].append(("total", calculate_version_downloads(list(map(lambda x : x[1], release[1])))))
     print("%s version %s" % (repo, release[0]))
     print(tabulate.tabulate(release[1], headers=["Artifact", "Downloads"], tablefmt="github"))
     print()
@@ -137,21 +147,21 @@ def print_stats_table(repo: str, release: Tuple[str, List[Tuple[str, int]]]):
 def main(argc: int, argv: List[str]) -> int:
     # Get options
     parser = ArgumentParser(description="Get download stats for a certain github repo")
-    parser.add_argument("-f", "--files", help="Specify extensions to drain from response")
+    parser.add_argument("-e", "--exclude", help="Specify extensions to exclude from response")
     parser.add_argument("REPOSITORY", help="Specify the repository to fetch (author/reponame)")
     args = parser.parse_args(argv)
     (author, repo_name) = args.REPOSITORY.split("/")
-    if args.files:
-        files = parse_extensions(args.files)
+    if args.exclude:
+        exclude = parse_extensions(args.exclude)
     else:
-        files = []
+        exclude = []
     # Fetch github
     try:
         releases = fetch_github_releases(author, repo_name)
     except requests.RequestException as err:
         print_err("Failed to fetch releases: %s" % err)
         return 1
-    stats = collect_stats(releases, files)
+    stats = collect_stats(releases, exclude)
     # Print table
     list(map(lambda x : print_stats_table(repo_name, x), stats))
     # Return success
