@@ -131,6 +131,16 @@ def calculate_version_downloads(counters: List[int]) -> int:
     """
     return sum(counters)
 
+def filter_releases_by_version(releases: List[Tuple[str, List[Tuple[str, int]]]], tag: str) -> List[Tuple[str, List[Tuple[str, int]]]]:
+    """
+    Keep only the release with the provided tag name
+
+    :param releases
+    :param tag
+    :returns list
+    """
+    return list(filter(lambda x : x[0] == tag, releases))
+
 def print_stats_table(repo: str, release: Tuple[str, List[Tuple[str, int]]]):
     """
     Print stats table for a single release
@@ -148,6 +158,7 @@ def main(argc: int, argv: List[str]) -> int:
     # Get options
     parser = ArgumentParser(description="Get download stats for a certain github repo")
     parser.add_argument("-e", "--exclude", help="Specify extensions to exclude from response")
+    parser.add_argument("-v", "--version", help="Fetch stats for only the provided tag name")
     parser.add_argument("REPOSITORY", help="Specify the repository to fetch (author/reponame)")
     args = parser.parse_args(argv)
     (author, repo_name) = args.REPOSITORY.split("/")
@@ -155,6 +166,7 @@ def main(argc: int, argv: List[str]) -> int:
         exclude = parse_extensions(args.exclude)
     else:
         exclude = []
+    keep_version = args.version
     # Fetch github
     try:
         releases = fetch_github_releases(author, repo_name)
@@ -162,6 +174,9 @@ def main(argc: int, argv: List[str]) -> int:
         print_err("Failed to fetch releases: %s" % err)
         return 1
     stats = collect_stats(releases, exclude)
+    # Filter version if required
+    if keep_version:
+        stats = filter_releases_by_version(stats, keep_version)
     # Print table
     list(map(lambda x : print_stats_table(repo_name, x), stats))
     # Return success
