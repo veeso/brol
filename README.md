@@ -127,6 +127,7 @@ Brol is a repository with all those useful code snippets and tools written durin
 
 ### Rust
 
+- **[c-enums](rust/c-enums/src/main.rs)**: C-enums in Rust and conversion from primitives
 - **[chrono](rust/chrono/main.rs)**: utilities I've used in some projects, using the [chrono crate](https://github.com/chronotope/chrono)
 - **[console](rust/console)**: Console utils
 - **[file-utils](rust/file-utils)**: File utilities
