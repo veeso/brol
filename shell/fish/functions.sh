@@ -77,3 +77,22 @@ function blank;
     end
     echo "" > $FILE
 end # blank
+
+function url_encode;
+    set INPUT $argv
+    if [ -z "$INPUT" ]
+        echo "Usage: url_encode <input>"
+        return 255
+    end
+    echo $INPUT | jq -Rr @uri
+end # url_encode
+
+function gif;
+    set TAG $argv
+    if [ -z "$TAG" ]
+        echo "Usage: gif <tag>"
+        return 255
+    end
+    set TAG (url_encode $TAG)
+    curl --silent "https://api.giphy.com/v1/gifs/random?tag=$TAG&api_key=0UTRbFtkMxAplrohufYco5IY74U8hOes" | jq .data.image_url | xargs -L 1 curl --silent | viu --height 32 -
+end # gif
