@@ -145,6 +145,7 @@ Brol is a repository with all those useful code snippets and tools written durin
   - Requires [chrono](https://github.com/chronotope/chrono)
   - Requires [rpassword](https://github.com/conradkleinespel/rpassword)
   - Requires [ssh2-rs](https://github.com/alexcrichton/ssh2-rs)
+- **[sha-1](rust/sha1/src/main.rs)**: SHA-1 encoding
 - **[store](rust/store/store.rs)**: A generic purpose key-value storage in Rust
 - **[ssh-client](rust/ssh-client)**: Just a minimalist SSH client.
   - Requires [rpassword](https://github.com/conradkleinespel/rpassword)
