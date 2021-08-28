@@ -127,6 +127,7 @@ Brol is a repository with all those useful code snippets and tools written durin
 
 ### Rust
 
+- **[aws-s3-cli](rust/aws-s3-cli/src/main.rs)**: A simple CLI client for AWS S3
 - **[bytes](rust/bytes/src/main.rs)**: Example of usage of the [bytes](https://docs.rs/crate/bytes/1.0.1) crate
 - **[c-enums](rust/c-enums/src/main.rs)**: C-enums in Rust and conversion from primitives
 - **[chrono](rust/chrono/main.rs)**: utilities I've used in some projects, using the [chrono crate](https://github.com/chronotope/chrono)
