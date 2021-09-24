@@ -133,6 +133,7 @@ Brol is a repository with all those useful code snippets and tools written durin
 - **[chrono](rust/chrono/main.rs)**: utilities I've used in some projects, using the [chrono crate](https://github.com/chronotope/chrono)
 - **[console](rust/console)**: Console utils
 - **[file-utils](rust/file-utils)**: File utilities
+- **[fs-notify](rust/fs-notify/src/main.rs)**: File system [notify](https://github.com/notify-rs/notify) example
 - **[keyring-client](rust/keyring-client)**: A rust keyring client, which uses `keyring-rs` to interact with your secret storage.
 - **[git](rust/git)**: Git utilities. **GPL3 License**
 - **[git-latest-release](rust/git-latest-release)**: Get through git API the latest release for a repository
