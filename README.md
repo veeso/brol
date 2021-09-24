@@ -137,6 +137,7 @@ Brol is a repository with all those useful code snippets and tools written durin
 - **[git](rust/git)**: Git utilities. **GPL3 License**
 - **[git-latest-release](rust/git-latest-release)**: Get through git API the latest release for a repository
 - **[magic-crypt](rust/magic-crypt/main.rs)**: Encryption/decryption example using [magic-crypt](https://github.com/magiclen/rust-magiccrypt)
+- **[Notifications](rust/notifications/src/main.rs)**: Notify-rust example
 - **[open](rust/open/src/main.rs)**: [open-rs](https://github.com/Byron/open-rs) example
 - **[pipe](rust/pipe)**: UNIX Pipes Façade for Rust. **GPL3 License**
 - **[progress_bar](rust/progress_bar)**: Simple progress bar in rust.
