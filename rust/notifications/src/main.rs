@@ -6,12 +6,12 @@ use std::process::exit;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    if args.len() < 2 {
+    if args.len() < 3 {
         eprintln!("Usage: notifications <title> <body>");
         exit(255);
     }
-    let title = args.get(0).to_owned().unwrap();
-    let body = args.get(1).to_owned().unwrap();
+    let title = args.get(1).to_owned().unwrap();
+    let body = args.get(2).to_owned().unwrap();
     if let Err(err) = Notification::new()
         .summary(title.as_str())
         .body(body.as_str())
