@@ -24,8 +24,15 @@ fn main() -> Result<()> {
         QueueDeclareOptions::default(),
         FieldTable::default(),
     ))?;
+    let _ = executor::block_on(channel.queue_bind(
+        queue_name,
+        "random",
+        "this.routing",
+        QueueBindOptions::default(),
+        FieldTable::default(),
+    ))?;
     let mut consumer: Consumer = executor::block_on(channel.basic_consume(
-        "test",
+        queue_name,
         "omar",
         BasicConsumeOptions::default(),
         FieldTable::default(),
