@@ -80,6 +80,7 @@ Brol is a repository with all those useful code snippets and tools written durin
 
 ### JavaScript
 
+- **[flatten](js/flatten/flatten.js)**: Flatte a JS object
 - **[range](js/range)**: A function which creates array of numbers from ranges of numbers
 - **[strptime](js/strptime)**: exactly strptime
 
