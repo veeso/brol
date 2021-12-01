@@ -154,6 +154,7 @@ Brol is a repository with all those useful code snippets and tools written durin
 - **[ssh-client](rust/ssh-client)**: Just a minimalist SSH client.
   - Requires [rpassword](https://github.com/conradkleinespel/rpassword)
   - Requires [ssh2-rs](https://github.com/alexcrichton/ssh2-rs)
+- **[ssh-config](rust/ssh-config)**: SSH config parser test
 - **[subproc](rust/subproc)**: UNIX subprocess with named pipes. **GPL3 License**
 
 ---
