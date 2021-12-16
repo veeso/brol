@@ -106,6 +106,7 @@ Brol is a repository with all those useful code snippets and tools written durin
 - **[randtime](python/randtime)**: Utility to generate a random date between now and a specified offset in days. I used it a lot to generate random times in my projects.
 - **[struncate](python/struncate)**: I swear nobody has ever did this before. A damn function to truncate the first n bytes from a file **without** creating a new one.
 - **[subvar](python/subvar)**: Replace `$VARIABLES` and `${VARIABLES}` in files using environment.
+- **[voice-demo(python/voice-demo)**: Some demo application to split audio by silence and to use voice recognition
 - **[wikidata-search](python/wikidata-search)**: Simple Python3 script which searches on wikidata the provided input and if the result is a person, retrieves metadata for it
 
 ---
