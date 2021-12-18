@@ -26,7 +26,7 @@ if __name__ == "__main__":
         print()
         with yaspin(text="Getting speech for chunk %d" % i) as spinner:
             audio_data = BytesIO()
-            audio_data = chunk.export(audio_data, "wav")
+            chunk.export(audio_data, "wav")
             sr_audio = sr.AudioFile(audio_data)
             with sr_audio as source:
                 try:
