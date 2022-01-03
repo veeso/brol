@@ -274,8 +274,7 @@ checksum = "f497285884f3fcff424ffc933e56d7cbca511def0c9831a7f9b5f6153e3cc89b"
 [[package]]
 name = "remotefs"
 version = "0.1.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c72915b01014a11d7e21b3a28141ff32b881bd8103c0f65269cc7932a03ae61c"
+source = "git+https://github.com/veeso/remotefs-rs?branch=buffer-test#fbc5157086984b4f255ebffd7f872f90cee25185"
 dependencies = [
  "chrono",
  "lazy_static",
