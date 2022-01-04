@@ -30,6 +30,12 @@ fn main() {
         .password(password)
         .into();
     run_test("SFTP", client, cycles);
+    let client: SftpFs = SshOpts::new(hostname)
+        .port(port)
+        .username(username)
+        .password(password)
+        .into();
+    run_test_copy("SFTP (copy)", client, cycles);
     // scp
     let client: ScpFs = SshOpts::new(hostname)
         .port(port)
@@ -37,6 +43,12 @@ fn main() {
         .password(password)
         .into();
     run_test("SCP", client, cycles);
+    let client: ScpFs = SshOpts::new(hostname)
+        .port(port)
+        .username(username)
+        .password(password)
+        .into();
+    run_test_copy("SCP (copy)", client, cycles);
 }
 
 fn run_test(name: &str, mut client: impl RemoteFs, cycles: usize) {
@@ -69,6 +81,41 @@ fn run_test(name: &str, mut client: impl RemoteFs, cycles: usize) {
             }
             bytes += bytes_read;
         }
+        avg += t_start.elapsed();
+        println!(
+            "Cycle {:02} took {}us ({}ms)",
+            n + 1,
+            t_start.elapsed().as_micros(),
+            t_start.elapsed().as_millis()
+        );
+        assert!(client.remove_file(dest).is_ok());
+    }
+    let avg = avg / (cycles as u32);
+    println!(
+        "Average time: {}us ({}ms)",
+        avg.as_micros(),
+        avg.as_millis()
+    );
+    assert!(client.disconnect().is_ok());
+}
+
+fn run_test_copy(name: &str, mut client: impl RemoteFs, cycles: usize) {
+    let dest = Path::new("/tmp/test.bin");
+    println!("TEST: {}", name);
+    assert!(client.connect().is_ok());
+    let mut avg = Duration::ZERO;
+    // Loop over cycles
+    for n in 0..cycles {
+        let mut file =
+            File::open("/tmp/data.bin").expect("You need to put a file /tmp/data.bin to run this");
+        let file_size: u64 = file.seek(std::io::SeekFrom::End(0)).unwrap_or(0);
+        // rewind
+        file.seek(std::io::SeekFrom::Start(0))
+            .expect("Could not rewind");
+        let t_start = Instant::now();
+        client
+            .create_file(dest, &Metadata::default().size(file_size), Box::new(file))
+            .expect("Failed to create file");
         avg += t_start.elapsed();
         println!(
             "Cycle {:02} took {}us ({}ms)",
