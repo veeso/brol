@@ -20,7 +20,7 @@ Brol is a repository with all those useful code snippets and tools written durin
     - [Rust](#rust)
     - [Shell](#shell)
   - [Code of conduct](#code-of-conduct)
-  - [Buy me a coffee](#buy-me-a-coffee)
+  - [Support the developer](#support-the-developer-)
   - [License](#license)
 
 ## Projects
@@ -172,11 +172,16 @@ View repository [Code of conduct](CODE_OF_CONDUCT.md)
 
 ---
 
-## Buy me a coffee
+## Support the developer ☕
 
-If you like what I do, please consider a little donation 🥳
+If you like termscp and you're grateful for the work I've done, please consider a little donation 🥳
 
-[![Buy-me-a-coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=veeso&button_colour=404040&font_colour=ffffff&font_family=Comic&outline_colour=ffffff&coffee_colour=FFDD00)](https://www.buymeacoffee.com/veeso)
+You can make a donation with one of these platforms:
+
+[![ko-fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/veeso)
+[![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://www.paypal.me/chrisintin)
+[![bitcoin](https://img.shields.io/badge/Bitcoin-ff9416?style=for-the-badge&logo=bitcoin&logoColor=white)](https://btc.com/bc1qvlmykjn7htz0vuprmjrlkwtv9m9pan6kylsr8w)
+[![ethereum](https://img.shields.io/badge/Ethereum-3C3C3D?style=for-the-badge&logo=Ethereum&logoColor=white)](https://etherscan.io/address/0xE57E761Aa806c9afe7e06Fb0601B17beC310f9c4)
 
 ---
 
