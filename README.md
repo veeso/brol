@@ -174,7 +174,7 @@ View repository [Code of conduct](CODE_OF_CONDUCT.md)
 
 ## Support the developer ☕
 
-If you like termscp and you're grateful for the work I've done, please consider a little donation 🥳
+If my snippets resulted useful to you and you're grateful for the work I've done, please consider a little donation 🥳
 
 You can make a donation with one of these platforms:
 
