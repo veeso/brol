@@ -1,0 +1,18 @@
+[package]
+name = "imap-client"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "^1.0"
+async-imap = "^0.6.0"
+async-native-tls = "^0.4.0"
+async-std = "^1.10"
+dotenv = "0.15.0"
+envy = "^0.4.2"
+futures = "^0.3"
+mail-parser = "^0.6.0"
+serde = { version = "^1.0.0", features = [ "derive" ] }
+tokio = { version = "1.20.1", features = [ "full" ] }
