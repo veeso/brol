@@ -9,7 +9,7 @@ fn main() {
         exit(255);
     }
 
-    let data = history::retrieve_interval(&args[1], Interval::_10y).unwrap();
+    let data = history::retrieve_interval(&args[1], Interval::_1y).expect("could not load symbol");
 
     // print the date and closing price for each day we have data
     for bar in &data {
