@@ -1,0 +1,9 @@
+[package]
+name = "sounds-8-bit"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rodio = { version = "^0.16", default-features = false }
