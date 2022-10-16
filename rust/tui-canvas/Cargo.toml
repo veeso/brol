@@ -1,0 +1,11 @@
+[package]
+name = "tui-canvas"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "^1.0"
+tui-realm-stdlib = "^1.1.7"
+tuirealm = "^1.8.0"
