@@ -35,7 +35,8 @@ fn main() -> anyhow::Result<()> {
     let mut model = Model::default();
 
     let (x, y) = model.origin()?;
-    let shape = Render::render(x, y * 4.0, &shape_str)?;
+    let y = Render::origin_y(y);
+    let shape = Render::render(x, y, &shape_str)?;
 
     model.mount_canvas(&shape)?;
     model.run()?;

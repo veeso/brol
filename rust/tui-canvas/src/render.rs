@@ -33,4 +33,8 @@ impl Render {
         }
         Ok(shapes)
     }
+
+    pub fn origin_y(canvas_height: f64) -> f64 {
+        (canvas_height * Y_SIZE) - (4.0 * Y_SIZE)
+    }
 }

@@ -350,9 +350,9 @@ dependencies = [
 
 [[package]]
 name = "tui-realm-stdlib"
-version = "1.1.7"
+version = "1.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e08728483414e0bcb385f6fa11df99b4b273813d11ee38aa30db12e6db30bc66"
+checksum = "66f252bf8b07c6fd708ddd6349b5f044ae5b488b26929c745728d9c7e2cebfa6"
 dependencies = [
  "textwrap",
  "tuirealm",

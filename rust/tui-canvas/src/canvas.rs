@@ -1,5 +1,6 @@
 use tui_realm_stdlib::Canvas as TuiCanvas;
 use tuirealm::props::Shape;
+use tuirealm::tui::symbols::Marker;
 use tuirealm::{
     event::{Key, KeyEvent},
     Component, Event, MockComponent, NoUserEvent,
@@ -17,6 +18,7 @@ impl Canvas {
         Self {
             component: TuiCanvas::default()
                 .data(shapes)
+                .marker(Marker::Block)
                 .x_bounds((0.0, width))
                 .y_bounds((0.0, height)),
         }
