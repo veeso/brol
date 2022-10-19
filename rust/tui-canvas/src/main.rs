@@ -33,10 +33,12 @@ fn main() -> anyhow::Result<()> {
     }
     let shape_str = read_shape_file(&args[1])?;
     let mut model = Model::default();
+    let (width, height) = model.size()?;
+    let render = Render::new(width, height);
 
     let (x, y) = model.origin()?;
-    let y = Render::origin_y(y);
-    let shape = Render::render(x, y, &shape_str)?;
+    let y = render.origin_y(y);
+    let shape = render.render(x, y, &shape_str)?;
 
     model.mount_canvas(&shape)?;
     model.run()?;

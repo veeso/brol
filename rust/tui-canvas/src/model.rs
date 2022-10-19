@@ -93,6 +93,11 @@ impl Model {
         Ok((rect.x as f64, rect.height as f64 - 2.0))
     }
 
+    pub fn size(&self) -> anyhow::Result<(f64, f64)> {
+        let rect = self.terminal.raw().size()?;
+        Ok((rect.width as f64, rect.height as f64))
+    }
+
     fn view(&mut self) -> anyhow::Result<()> {
         self.redraw = false;
         self.terminal.raw_mut().draw(|f| {
