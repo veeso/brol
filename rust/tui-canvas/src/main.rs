@@ -3,7 +3,8 @@ mod model;
 mod render;
 
 use model::Model;
-use render::Render;
+use render::{Render, Room};
+use tuirealm::props::Color;
 
 use std::fs::File;
 use std::io::Read;
@@ -36,11 +37,12 @@ fn main() -> anyhow::Result<()> {
     let (width, height) = model.size()?;
     let render = Render::new(width, height);
 
-    let (x, y) = model.origin()?;
-    let y = render.origin_y(y);
-    let shape = render.render(x, y, &shape_str)?;
+    let item_x = (width / 2.0) - ((shape_str.len() / 2) as f64);
+    let shape = render.ascii_art(item_x, height, &shape_str, Color::Yellow);
+    let room = render.render_room(Room::CorridorWithMazeExit);
+    let shapes = render.stack(vec![room, shape]);
 
-    model.mount_canvas(&shape)?;
+    model.mount_canvas(&shapes)?;
     model.run()?;
 
     Ok(())
