@@ -67,7 +67,7 @@ impl Render {
     pub fn ascii_art(&self, mut x: f64, mut y: f64, data: &str, color: Color) -> Vec<Shape> {
         let newline_x = x;
         let mut shapes = Vec::new();
-        for line in data.lines() {
+        for line in data.lines().rev() {
             // reset x
             x = newline_x;
             // iter line chars
@@ -85,7 +85,7 @@ impl Render {
                 x += self.x_scale;
             }
             // incr y
-            y -= self.y_scale;
+            y += self.y_scale;
         }
         shapes
     }
@@ -109,12 +109,6 @@ impl Render {
             stack.push(Shape::Layer);
         }
         stack
-    }
-
-    /// Get canvas Y-origin
-    pub fn origin_y(&self, canvas_height: f64) -> f64 {
-        // 4 should be block height I guess
-        (canvas_height * self.y_scale) - (4.0 * self.y_scale)
     }
 
     fn render_room_corridor(&self) -> Vec<Shape> {
@@ -183,6 +177,7 @@ impl Render {
 
     fn render_room_corridor_with_maze_exit(&self) -> Vec<Shape> {
         let mut shapes = self.render_room_corridor();
+        shapes.push(Shape::Layer);
         let half_width = self.width / 2.0;
         let door_width = half_width - (half_width * 0.80);
         shapes.push(Shape::Rectangle(Rectangle {
@@ -195,15 +190,172 @@ impl Render {
         shapes
     }
 
-    fn render_room_three_exit(&self) -> Vec<Shape> {
-        self.render_room_corridor()
+    fn render_room_two_exit(&self) -> Vec<Shape> {
+        let mut shapes = self.render_room_three_exit();
+        let half_width = self.width / 2.0;
+
+        // @! wall
+        let front_wall_x = half_width - (half_width * 0.30);
+        let front_wall_x2 = self.width - half_width + (half_width * 0.30);
+        for i in 0..(self.height as i32) {
+            let y = i as f64 * self.y_scale;
+            shapes.push(Shape::Line(Line {
+                x1: front_wall_x,
+                x2: front_wall_x2,
+                y1: y,
+                y2: y,
+                color: Color::DarkGray,
+            }))
+        }
+
+        shapes
     }
 
     fn render_room_two_exit_with_maze_exit(&self) -> Vec<Shape> {
-        self.render_room_corridor_with_maze_exit()
+        let mut shapes = self.render_room_two_exit();
+
+        shapes.push(Shape::Layer);
+        let half_width = self.width / 2.0;
+        let door_width = half_width - (half_width * 0.40);
+        let door_x = half_width - (door_width / 2.0);
+        let door_y = (self.height / 2.0) + (15.0 * self.y_scale);
+        shapes.push(Shape::Rectangle(Rectangle {
+            x: door_x,
+            y: door_y - 40.0,
+            width: door_width,
+            height: 80.0,
+            color: Color::Green,
+        }));
+
+        shapes
     }
 
-    fn render_room_two_exit(&self) -> Vec<Shape> {
-        self.render_room_corridor()
+    fn render_room_three_exit(&self) -> Vec<Shape> {
+        let mut shapes = Vec::new();
+        let half_width = self.width / 2.0;
+        // lines from left to right
+        let left_wall_x = half_width - (half_width * 0.80);
+
+        // vertical lines
+        let start_y = self.x_scale * 6.0;
+        for i in 0..6 {
+            let incr = (i as f64) * start_y;
+            shapes.push(Shape::Line(Line {
+                x1: 0.0,
+                x2: left_wall_x,
+                y1: incr,
+                y2: left_wall_x + incr,
+                color: Color::DarkGray,
+            }))
+        }
+        // horizontal lines
+        let start_x = self.y_scale * 4.0;
+        for i in 0..4 {
+            let incr = (i as f64) * start_x;
+            shapes.push(Shape::Line(Line {
+                x1: incr,
+                x2: left_wall_x,
+                y1: 0.0,
+                y2: left_wall_x - incr,
+                color: Color::DarkGray,
+            }))
+        }
+
+        // @! door
+
+        // redo
+        // lines from left to right
+        let left_wall_x1 = half_width - (half_width * 0.50);
+        let left_wall_x2 = half_width - (half_width * 0.30);
+
+        // vertical lines
+        let start_y = self.x_scale * 6.0;
+        for i in 0..6 {
+            let incr = (i as f64) * start_y;
+            shapes.push(Shape::Line(Line {
+                x1: left_wall_x1,
+                x2: left_wall_x2,
+                y1: incr + left_wall_x1,
+                y2: left_wall_x2 + incr,
+                color: Color::DarkGray,
+            }))
+        }
+        // horizontal lines
+        let start_x = self.y_scale * 4.0;
+        for i in 0..4 {
+            let incr = (i as f64) * start_x;
+            shapes.push(Shape::Line(Line {
+                x1: left_wall_x1 + incr,
+                x2: left_wall_x2,
+                y1: 0.0,
+                y2: left_wall_x - incr,
+                color: Color::DarkGray,
+            }))
+        }
+
+        // lines from right to left
+        let right_wall_x2 = self.width;
+        let right_wall_x = right_wall_x2 - half_width + (half_width * 0.80);
+        // vertical lines
+        let start_y = self.x_scale * 6.0;
+
+        for i in 0..6 {
+            let incr = (i as f64) * start_y;
+            shapes.push(Shape::Line(Line {
+                x1: right_wall_x,
+                x2: right_wall_x2,
+                y1: left_wall_x + incr,
+                y2: incr,
+                color: Color::DarkGray,
+            }))
+        }
+        // horizontal lines
+        let start_x = self.y_scale * 4.0;
+        for i in 0..4 {
+            let incr = (i as f64) * start_x;
+            let x1 = right_wall_x2 - incr;
+            shapes.push(Shape::Line(Line {
+                x1,
+                x2: right_wall_x,
+                y1: 0.0,
+                y2: left_wall_x - incr,
+                color: Color::DarkGray,
+            }))
+        }
+
+        // @! door
+
+        // redo
+        // lines from left to right
+        let right_wall_x1 = self.width - half_width + (half_width * 0.50);
+        let right_wall_x2 = self.width - half_width + (half_width * 0.30);
+
+        // vertical lines
+        let start_y = self.x_scale * 6.0;
+        for i in 0..6 {
+            let incr = (i as f64) * start_y;
+            shapes.push(Shape::Line(Line {
+                x1: right_wall_x1,
+                x2: right_wall_x2,
+                y1: left_wall_x1 + incr,
+                y2: incr + left_wall_x2,
+                color: Color::DarkGray,
+            }))
+        }
+        // horizontal lines
+        let start_x = self.y_scale * 4.0;
+        for i in 1..2 {
+            let incr = (i as f64) * start_x;
+            let x1 = right_wall_x2 + incr;
+            shapes.push(Shape::Line(Line {
+                x1,
+                x2: right_wall_x2,
+                y1: 0.0,
+                y2: left_wall_x1 - incr,
+                color: Color::DarkGray,
+            }))
+        }
+
+        shapes
     }
 }

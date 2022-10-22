@@ -38,8 +38,8 @@ fn main() -> anyhow::Result<()> {
     let render = Render::new(width, height);
 
     let item_x = (width / 2.0) - ((shape_str.len() / 2) as f64);
-    let shape = render.ascii_art(item_x, height, &shape_str, Color::Yellow);
-    let room = render.render_room(Room::CorridorWithMazeExit);
+    let shape = render.ascii_art(item_x, 0.0, &shape_str, Color::Yellow);
+    let room = render.render_room(Room::TwoExitWithMazeExit);
     let shapes = render.stack(vec![room, shape]);
 
     model.mount_canvas(&shapes)?;
