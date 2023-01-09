@@ -156,24 +156,24 @@ impl Sound {
             .tone(0.0, 600, 0.2)
             .tone(10.0, 200, 4.0)
             .tone(0.0, 600, 0.2)
-            .tone(Note::Mi.freq(2), 400, 2.0)
-            .tone(Note::Mi.freq(2), 400, 2.0)
-            .tone(Note::Mi.freq(2), 400, 2.0)
-            .tone(Note::Do.freq(2), 1000, 2.0)
+            .tone(Note::Mi.freq(2), 500, 0.8)
+            .tone(Note::Mi.freq(2), 500, 0.8)
+            .tone(Note::Mi.freq(2), 500, 0.8)
+            .tone(Note::Do.freq(2), 1000, 0.8)
     }
 
     fn enemy_attack() -> Track {
         Track::default()
-            .tone(50.0, 300, 15.0)
-            .tone(70.0, 100, 15.0)
-            .tone(100.0, 250, 15.0)
+            .tone(50.0, 300, 1.0)
+            .tone(70.0, 100, 1.0)
+            .tone(100.0, 250, 1.0)
     }
 
     fn enemy_scream() -> Track {
         Track::default()
-            .tone(100.0, 120, 20.0)
-            .tone(120.0, 120, 20.0)
-            .tone(140.0, 500, 20.0)
+            .tone(100.0, 120, 1.0)
+            .tone(120.0, 120, 1.0)
+            .tone(140.0, 500, 1.0)
     }
 
     fn error() -> Track {
@@ -204,9 +204,7 @@ impl Sound {
     }
 
     fn player_attack() -> Track {
-        Track::default()
-            .tone(120.0, 130, 25.0)
-            .tone(110.0, 30, 25.0)
+        Track::default().tone(120.0, 130, 1.0).tone(110.0, 80, 1.0)
     }
 
     fn player_dead() -> Track {
