@@ -1,0 +1,18 @@
+{
+  "deviceType": "SMART.TAPOBULB",
+  "role": 0,
+  "fwVer": "1.0.9 Build 220526 Rel.203202",
+  "appServerUrl": "https://eu-wap.tplinkcloud.com",
+  "deviceRegion": "eu-west-1",
+  "deviceId": "80237AAD8331E563E83BB6F0C06D30871F47D794",
+  "deviceName": "L530",
+  "deviceHwVer": "2.0",
+  "alias": "c2NhbGEgYm90IGxlZnQ=",
+  "deviceMac": "5CA6E6F0BFEF",
+  "oemId": "2241AD354FF56159AF1AC4A53B011A5D",
+  "deviceModel": "L530E(EU)",
+  "hwId": "FDE1C68674D1535B12A042682B192E4E",
+  "fwId": "00000000000000000000000000000000",
+  "isSameRegion": true,
+  "status": 0
+}

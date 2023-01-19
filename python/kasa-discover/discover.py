@@ -1,6 +1,5 @@
 from pprint import pprint
 import requests
-from scapy.layers.l2 import getmacbyip
 from sys import argv
 from typing import List, Dict, Any
 from uuid import uuid4
@@ -46,13 +45,12 @@ def tidy_mac(mac: str) -> str:
 
 
 def main(args: List[str]) -> int:
-    if len(args) < 3:
-        print("Usage: <email> <password> <network_addr>")
+    if len(args) < 2:
+        print("Usage: <email> <password>")
         return 255
 
     email = args[0]
     password = args[1]
-    network_addr = args[2]
 
     try:
         cloud_token = tapocloud_login(email, password)
