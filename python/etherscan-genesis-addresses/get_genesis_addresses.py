@@ -8,11 +8,9 @@ import json
 MAX_PAGE = 178
 
 
-def get_page(page: int) -> BeautifulSoup:
-    driver = webdriver.Firefox()
+def get_page(page: int, driver: webdriver.Firefox) -> BeautifulSoup:
     driver.get(f"https://etherscan.io/txs?block=0&p={page}")
     soup = BeautifulSoup(driver.page_source, "html.parser")
-    driver.close()
 
     return soup
 
@@ -51,9 +49,12 @@ def get_genesis_addresses(soup: BeautifulSoup) -> List[Tuple[str, str]]:
 
 if __name__ == "__main__":
     genesis_addresses = []
+    driver = webdriver.Firefox()
     for page in (0, MAX_PAGE + 1):
-        soup = get_page(page)
+        soup = get_page(page, driver)
         genesis_addresses += get_genesis_addresses(soup)
+
+    driver.close()
 
     # prepare output
     genesis_addresses_list = []
