@@ -3,13 +3,27 @@
 from selenium import webdriver
 from typing import List, Tuple
 from bs4 import BeautifulSoup
+from getopt import getopt
 import json
 
 MAX_PAGE = 178
+NETWORK_GOERLI = "goerli"
+NETWORK_MAINNET = "mainnet"
+NETWORK_SEPOLIA = "sepolia"
+NETWORKS = [
+    NETWORK_GOERLI,
+    NETWORK_MAINNET,
+    NETWORK_SEPOLIA,
+]
+NETWORKS_URL = {
+    NETWORK_GOERLI: "https://goerli.etherscan.io",
+    NETWORK_MAINNET: "https://etherscan.io",
+    NETWORK_SEPOLIA: "https://sepolia.etherscan.io",
+}
 
 
-def get_page(page: int, driver: webdriver.Firefox) -> BeautifulSoup:
-    driver.get(f"https://etherscan.io/txs?block=0&p={page}")
+def get_page(network: str, page: int, driver: webdriver.Firefox) -> BeautifulSoup:
+    driver.get(f"{NETWORKS_URL[network]}/txs?block=0&p={page}")
     soup = BeautifulSoup(driver.page_source, "html.parser")
 
     return soup
@@ -47,11 +61,47 @@ def get_genesis_addresses(soup: BeautifulSoup) -> List[Tuple[str, str]]:
     return genesis_addresses
 
 
+def usage():
+    print(f"Usage: {argv[0]} [-n <network>] [-o <outputfile>] [-h]")
+    print(
+        "\t-n <network>: network to get genesis addresses from (mainnet, sepolia, goerli)"
+    )
+    print("\t-o <outputfile>: output file")
+    print("\t-h: show this help message")
+
+
 if __name__ == "__main__":
+    # getopts
+    from sys import argv
+
+    try:
+        optlist, args = getopt(argv[1:], "n:o:h")
+    except:
+        usage()
+        exit(1)
+
+    network = NETWORK_MAINNET
+    outputfile = "output.json"
+    for opt, arg in optlist:
+        if opt == "-n":
+            if arg not in NETWORKS:
+                usage()
+                exit(1)
+            network = str(arg)
+        elif opt == "-o":
+            outputfile = str(arg)
+        elif opt == "-h":
+            usage()
+            exit(1)
+
+    if not network in NETWORKS:
+        usage()
+        exit(1)
+
     genesis_addresses = []
     driver = webdriver.Firefox()
     for page in (0, MAX_PAGE + 1):
-        soup = get_page(page, driver)
+        soup = get_page(network, page, driver)
         genesis_addresses += get_genesis_addresses(soup)
 
     driver.close()
