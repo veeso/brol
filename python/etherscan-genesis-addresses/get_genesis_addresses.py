@@ -44,6 +44,8 @@ def get_genesis_addresses(soup: BeautifulSoup) -> List[Tuple[str, str]]:
 
     for row in table_rows:
         cols = row.find_all("td")
+        if len(cols) < 11:
+            continue
         to_address_col = cols[9]
         to_address_col = to_address_col.find("a")
         to_address = to_address_col["href"].replace("/address/", "")
@@ -53,7 +55,7 @@ def get_genesis_addresses(soup: BeautifulSoup) -> List[Tuple[str, str]]:
         value_col = value_col.find("span")
         value = value_col["data-bs-title"].split(" ")[0]
         value = value.replace(",", "")
-        eth = float(value)
+        eth = int(value)
         wei = str(int(eth * 1_000_000_000_000_000_000))
 
         genesis_addresses.append((to_address, wei))

@@ -11,7 +11,7 @@ if __name__ == "__main__":
         records = json.loads(f.read())
         f.close()
 
-    genesis_accounts = records["genesisAccounts"]
+    genesis_accounts = records["genesisAddresses"]
 
     with open(output_file, "w") as f:
         for account in genesis_accounts:
