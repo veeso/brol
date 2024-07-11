@@ -98,7 +98,7 @@ where
 
 fn parse_range_alt<T>(range_str: &str) -> Result<Vec<T>, Box<dyn Error>>
 where
-    T: FromStr + TryInto<isize> + TryFrom<isize> + std::fmt::Debug,
+    T: FromStr + TryInto<isize> + TryFrom<isize>,
 {
     // parse both format: 0-3 or 0,1,2,3
     if range_str.contains('-') {
