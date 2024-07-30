@@ -1,0 +1,19 @@
+[package]
+name = "cursor"
+version = "0.1.0"
+edition = "2021"
+authors = ["Christian Visintin <christian.visintin@veeso.dev>"]
+categories = ["algorithms"]
+description = "A cursor type to iterate over a range of elements"
+homepage = "https://github.com/veeso/brol"
+include = ["src/**/*"]
+keywords = ["cursor"]
+license = "MIT"
+repository = "https://github.com/veeso/brol"
+
+
+[lib]
+name = "cursor"
+path = "src/lib.rs"
+
+[dependencies]
