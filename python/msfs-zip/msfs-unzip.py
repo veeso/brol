@@ -102,40 +102,44 @@ def get_simbojects_archives(dir: str) -> List[ArchiveSimObjects]:
     return filtered
 
 
-def merge_archives(archives: List[ArchiveSimObjects], output: str) -> None:
-    with zipfile.ZipFile(output, "w") as zip_ref:
-        for archive in archives:
-            print("Adding archive", archive.file_path)
-            if archive.file_path.endswith(".rar"):
-                with rarfile.RarFile(archive.file_path, "r") as archive_ref:
-                    for file in archive_ref.namelist():
-                        if file.startswith(archive.inner_path):
-                            # check if file is a directory, if so, skip
-                            if file.endswith("/"):
-                                continue
-                            print(file)
+def extract_archives(archives: List[ArchiveSimObjects], output: str) -> None:
+    for archive in archives:
+        print("Extracting archive", archive.file_path)
+        if archive.file_path.endswith(".rar"):
+            with rarfile.RarFile(archive.file_path, "r") as archive_ref:
+                # extract inner path into output directory
+                for file in archive_ref.namelist():
+                    if file.startswith(archive.inner_path):
+                        output_file = get_output_path(file, archive.sim_objects_parent)
+                        # get parent_dir of output_file
+                        parent_dir = os.path.dirname(output_file)
+                        if parent_dir:
+                            os.makedirs(os.path.join(output, parent_dir), exist_ok=True)
+                        # check if file is a directory, if so, skip
+                        if file.endswith("/"):
+                            continue
+                        print(file)
 
-                            # read file and write it to the zip
-                            data = archive_ref.read(file)
-                            output_file = get_output_path(
-                                file, archive.sim_objects_parent
-                            )
-                            zip_ref.writestr(output_file, data)
+                        with open(os.path.join(output, output_file), "wb") as f:
+                            f.write(archive_ref.read(file))
+                            f.close()
 
-            elif archive.file_path.endswith(".zip"):
-                with zipfile.ZipFile(archive.file_path, "r") as archive_ref:
-                    for file in archive_ref.namelist():
-                        if file.startswith(archive.inner_path):
-                            # check if file is a directory, if so, skip
-                            if file.endswith("/"):
-                                continue
-                            # read file and write it to the zip
-                            print(file)
-                            data = archive_ref.read(file)
-                            output_file = get_output_path(
-                                file, archive.sim_objects_parent
-                            )
-                            zip_ref.writestr(output_file, data)
+        elif archive.file_path.endswith(".zip"):
+            with zipfile.ZipFile(archive.file_path, "r") as archive_ref:
+                for file in archive_ref.namelist():
+                    if file.startswith(archive.inner_path):
+                        output_file = get_output_path(file, archive.sim_objects_parent)
+                        # get parent_dir of output_file
+                        parent_dir = os.path.dirname(output_file)
+                        if parent_dir:
+                            os.makedirs(os.path.join(output, parent_dir), exist_ok=True)
+                        # check if file is a directory, if so, skip
+                        if file.endswith("/"):
+                            continue
+                        print(file)
+                        with open(os.path.join(output, output_file), "wb") as f:
+                            f.write(archive_ref.read(file))
+                            f.close()
 
 
 def main(args: List[str]) -> int:
@@ -143,13 +147,13 @@ def main(args: List[str]) -> int:
     parser = ArgumentParser(
         description="Zip different msfs downloads in a single zip to extract quickly in the community folder"
     )
-    parser.add_argument("-o", "--output", help="Specify the output file path")
+    parser.add_argument("-o", "--output", help="Specify the community dir path")
     parser.add_argument(
         "ZIP_DIR", help="Specify the directory containing the zip files"
     )
     cli_args = parser.parse_args(args)
     zip_dir = cli_args.ZIP_DIR
-    output = cli_args.output
+    community_dir = cli_args.output
 
     archives_to_add = get_simbojects_archives(zip_dir)
 
@@ -158,7 +162,7 @@ def main(args: List[str]) -> int:
         return 1
 
     # Merge archives
-    merge_archives(archives_to_add, output)
+    extract_archives(archives_to_add, community_dir)
 
     # Return success
     return 0
