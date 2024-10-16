@@ -1,0 +1,10 @@
+[package]
+name = "trycmd-replace"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1"
+lazy-regex = "3"
+trycmd = "0.15"
+wildmatch = "2"
