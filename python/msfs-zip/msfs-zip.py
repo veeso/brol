@@ -43,6 +43,9 @@ def find_simobjects_root(namelist: List[str]):
         if "SimObjects/" in item:
             # Ottieni il percorso della cartella padre di "SimObjects"
             return os.path.split(item.split("SimObjects/")[0])[0]
+        # Sceneries have `ContentInfo` instead of `SimObjects`
+        elif "ContentInfo/" in item:
+            return os.path.split(item.split("ContentInfo/")[0])[0]
     return None
 
 
